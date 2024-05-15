@@ -29,17 +29,17 @@ app.get("/", (req, res, next) => {
   res.json({
     message: "Server running healthy",
   });
-  app.use("*", (req, res, next) => {
-    const err = new Error("404 Not Found");
-    err.status = 404;
-    next(err);
-  });
+});
+app.use("*", (req, res, next) => {
+  const err = new Error("404 Not Found");
+  err.status = 404;
+  next(err);
 });
 
 //global error handler
 
 app.use((error, req, res, next) => {
-  console.log(error);
+  console.log(error.status);
 
   res.status(error.status || 500);
   res.json({

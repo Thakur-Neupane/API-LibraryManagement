@@ -1,5 +1,5 @@
 import bcrypt from "bcryptjs";
 
-export const hasPassword = (Plainpass) => {
+export const hashPassword = (Plainpass) => {
   return bcrypt.hashSync(Plainpass);
 };
