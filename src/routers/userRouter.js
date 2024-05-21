@@ -3,6 +3,7 @@ import express from "express";
 import { createNewUser } from "../models/user/UserModel.js";
 import { comparePassword, hashPassword } from "../utils/bcrypt.js";
 import { newUserValidation } from "../middlewares/joiValidation.js";
+import { auth } from "../middlewares/auth.js";
 
 import { getUserByEmail } from "../models/user/UserModel.js";
 import { signAccessJWT, signRefreshJWT } from "../utils/jwt.js";
@@ -13,18 +14,6 @@ router.all("/", (req, res, next) => {
   //always execute
   console.log("from all");
   next();
-});
-// return the user profile
-
-router.get("/", (req, res, next) => {
-  try {
-    res.json({
-      status: "success",
-      message: "todo GET",
-    });
-  } catch (error) {
-    next(error);
-  }
 });
 
 // Create new user
@@ -52,6 +41,8 @@ router.post("/", newUserValidation, async (req, res, next) => {
   }
 });
 
+// All the publi handlers
+
 // login
 router.post("/login", async (req, res, next) => {
   try {
@@ -69,7 +60,7 @@ router.post("/login", async (req, res, next) => {
           status: "success",
           message: "user Authenticated",
           tokens: {
-            AccessJWT: signAccessJWT({ email }),
+            accessJWT: signAccessJWT({ email }),
             refreshJWT: signRefreshJWT({ email }),
           },
         });
@@ -82,6 +73,23 @@ router.post("/login", async (req, res, next) => {
     });
 
     // check if pw match
+  } catch (error) {
+    next(error);
+  }
+});
+
+// Private controllers
+// return the user profile
+
+router.get("/", auth, (req, res, next) => {
+  try {
+    req.userInfo.refreshJWT = undefined;
+    req.userInfo.__v = undefined;
+    res.json({
+      status: "success",
+      message: "user Profile",
+      user: req.userInfo,
+    });
   } catch (error) {
     next(error);
   }
