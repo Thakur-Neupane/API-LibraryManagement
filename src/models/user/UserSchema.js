@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema(
   {
     fName: {
       type: String,
-      required: true,
+      default: "student",
     },
     lName: {
       type: String,

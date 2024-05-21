@@ -10,7 +10,9 @@ export const signAccessJWT = (payload) => {
   insertToken({ token });
   return token;
 };
+
 // verify access jwt
+
 export const verifyAccessJWT = (token) => {
   try {
     return JWT.verify(token, process.env.ACCESS_JWT_SECRET);
@@ -20,12 +22,14 @@ export const verifyAccessJWT = (token) => {
   }
 };
 
-// Create refresh jwt
-export const signRefreshJWT = ({ email }) => {
+// create refresh jwt
+
+export const signRefreshJWT = (email) => {
   const refreshJWT = JWT.sign({ email }, process.env.REFRESH_JWT_SECRET, {
     expiresIn: "30d",
   });
   updateUser({ email }, { refreshJWT });
   return refreshJWT;
 };
+
 // verify refresh jwt
