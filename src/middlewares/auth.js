@@ -4,24 +4,27 @@ import { verifyAccessJWT } from "../utils/jwt.js";
 
 export const auth = async (req, res, next) => {
   try {
-    //1 receive jwt via authorization header
+    //     1. receive jwt via authorization header
     const { authorization } = req.headers;
 
-    // 2Verify if jwt is valid (no expired, sectetkey) by decoding jwt
+    // 2. verify if jwt is valid(no expired, secretkey) by decoding jwt
     const decoded = verifyAccessJWT(authorization);
 
     if (decoded?.email) {
-      // 3 check if the token exist in the db session table
+      // 3. Check if the token exist in the DB, session table
       const tokenObj = await findToken(authorization);
-
+      console.log(tokenObj);
       if (tokenObj?._id) {
-        // 4 extract email from the decoded jwt object
-        // 5 get user by email
+        // 4. Extract email from the decoded jwt obj
+        // 5. Get user by email
         const user = await getUserByEmail(decoded.email);
+
         if (user?._id) {
-          // if user exist, they are now authorized
+          // 6. If user exist, they are now authorized
+
           user.password = undefined;
           req.userInfo = user;
+          console.log(user);
           return next();
         }
       }

@@ -9,6 +9,7 @@ export const newUserValidation = (req, res, next) => {
       email: Joi.string().email({ minDomainSegments: 2 }),
       password: Joi.string().required(),
     });
+
     const { error } = schema.validate(req.body);
     error
       ? res.json({

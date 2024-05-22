@@ -17,11 +17,14 @@ const sessionSchema = new mongoose.Schema(
 );
 
 const SessionSchema = mongoose.model("Session", sessionSchema);
-// Just to show that we can write both schema and model in same file
+
+//just to show that we can write bot schema and model in the same file
+//Queries
 
 export const insertToken = (obj) => {
   return SessionSchema(obj).save();
 };
+
 export const findToken = (token) => {
   return SessionSchema.findOne({ token });
 };

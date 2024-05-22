@@ -2,10 +2,15 @@ import mongoose from "mongoose";
 
 const userSchema = new mongoose.Schema(
   {
-    fName: {
+    role: {
       type: String,
       default: "student",
     },
+    fName: {
+      type: String,
+      required: true,
+    },
+
     lName: {
       type: String,
       required: true,
@@ -24,7 +29,6 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-
     refreshJWT: {
       type: String,
       default: "",
@@ -34,4 +38,5 @@ const userSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
 export default mongoose.model("User", userSchema);

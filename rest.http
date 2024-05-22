@@ -1,29 +1,26 @@
-
-
 @rootURL = http://localhost:8000
+@apiEP = {{rootURL}}/api/v1
+@userAPI = {{apiEP}}/users
 
 
-@apiEP= {{rootURL}}/api/v1
 
-@userAPI ={{apiEP}}/users
-###check the server status
+### Check teh server status
 GET {{rootURL}}
-Authorization: "wertyuijbvgfrt"
-#from session storage
 
-###===Userapi
-###get user
+###===== user api
+### Get user  
 GET {{userAPI}}
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJpYXQiOjE3MTYyNTcxOTQsImV4cCI6MTcxNjI1ODA5NH0.G8DLTNrAkjC9RO5FrgEMREud-c-GH3ouzk3JcL4BWFQ
 
-###post user
+### Post user 
 POST {{userAPI}}
 Content-Type: application/json
 
 {
-    "fName":"A",
-    "lName":"A",
-    "phone":"12345",
-    "email":"aa@a.com",
-    "password":"123"
+    "fName": "prem",
+    "lName": "presfdsm",
+    "phone": 34567,
+    "email": "{asdf@sdfc.com",
+    "password": "sdfdsf"
+  
 }
-
