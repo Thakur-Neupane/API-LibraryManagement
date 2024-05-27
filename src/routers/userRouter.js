@@ -3,7 +3,7 @@ import { createNewUser, getUserByEmail } from "../models/user/UserModel.js";
 import { comparePassword, hashPassword } from "../utils/bcrypt.js";
 import { newUserValidation } from "../middlewares/joiValidation.js";
 import { singAccessJWT, singRefresJWT } from "../utils/jwt.js";
-import { auth } from "../middlewares/auth.js";
+import { auth, jwtAuth } from "../middlewares/auth.js";
 const router = express.Router();
 
 // router.all("/", (req, res, next) => {
@@ -86,6 +86,17 @@ router.get("/", auth, (req, res, next) => {
       message: "User profile",
       user: req.userInfo,
     });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// return new accessJWT
+router.get("/renew-accesjwt", jwtAuth, async (req, res, next) => {
+  try {
+    const { email } = req.userInfo;
+    const accessJWT = singAccessJWT({ email });
+    res.json({ accessJWT });
   } catch (error) {
     next(error);
   }

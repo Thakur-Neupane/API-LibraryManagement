@@ -16,8 +16,7 @@ export const verifyAccessJWT = (token) => {
   try {
     return JWT.verify(token, process.env.ACCESS_JWT_SECRET);
   } catch (error) {
-    console.log(error.message);
-    return "Invalid Token";
+    return error.message === "jwt expired" ? "jwt expired" : "Invalid Token";
   }
 };
 
@@ -30,3 +29,11 @@ export const singRefresJWT = ({ email }) => {
   return refreshJWT;
 };
 // verify refresh jwt
+
+export const verifyRefreshJWT = (token) => {
+  try {
+    return JWT.verify(token, process.env.REFRESH_JWT_SECRET);
+  } catch (error) {
+    return "Invalid Token";
+  }
+};

@@ -16,12 +16,11 @@ const bookSchema = new mongoose.Schema(
     },
     isbn: {
       type: String,
-
       unique: true,
       index: 1,
       required: true,
     },
-    publishedyear: {
+    publishedYear: {
       type: Number,
       required: true,
     },
@@ -31,6 +30,7 @@ const bookSchema = new mongoose.Schema(
     },
     description: {
       type: String,
+
       required: true,
     },
   },
@@ -39,4 +39,4 @@ const bookSchema = new mongoose.Schema(
   }
 );
 
-export default SessionSchema = mongoose.model("Book", bookSchema);
+export default mongoose.model("Book", bookSchema);
