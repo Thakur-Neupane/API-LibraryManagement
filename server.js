@@ -17,9 +17,11 @@ if (process.env.NODE_ENV !== "production") {
   app.use(morgan("dev"));
 }
 
-//rotuers
-import userRoter from "./src/routers/userRouter.js";
-app.use("/api/v1/users", userRoter);
+//routers
+import userRouter from "./src/routers/userRouter.js";
+import bookRouter from "./src/routers/bookRouter.js";
+app.use("/api/v1/users", userRouter);
+app.use("/api/v1/books", bookRouter);
 
 //server status
 app.get("/", (req, res, next) => {
