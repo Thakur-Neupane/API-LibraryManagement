@@ -1,6 +1,7 @@
 @rootURL = http://localhost:8000
 @apiEP = {{rootURL}}/api/v1
 @userAPI = {{apiEP}}/users
+@bookAPI = {{apiEP}}/books
 
 
 
@@ -16,11 +17,9 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJp
 POST {{userAPI}}
 Content-Type: application/json
 
-{
-    "fName": "prem",
-    "lName": "presfdsm",
-    "phone": 34567,
-    "email": "{asdf@sdfc.com",
-    "password": "sdfdsf"
-  
-}
+
+###Get Book
+GET {{bookAPI}}
+
+###get all public book for users
+GET {{bookAPI}}/all
