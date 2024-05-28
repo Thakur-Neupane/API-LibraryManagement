@@ -2,7 +2,7 @@ import express from "express";
 
 import { auth, isAdmin } from "../middlewares/auth.js";
 import { newBookValidation } from "../middlewares/joiValidation.js";
-import { getAllBooks, insertBook } from "../models/books/BookModal.js";
+import { getABookById, getAllBooks, insertBook } from "../models/books/BookModal.js";
 const router = express.Router();
 
 //create new user
@@ -28,13 +28,32 @@ router.post("/", auth, isAdmin, newBookValidation, async (req, res, next) => {
   }
 });
 
+
+
+
+// Private controllers
+router.get("/all",auth, isAdmin, async(req, ress, next)=>{
+  try {
+    const books = await getAllBooks();
+
+    res.json({
+      status:"success"
+      books,
+    })
+  } catch (error) {
+    next(error)
+  }
+})
+
+
 ///====== public controllers
 
 
 
-router.get("/", async(req, ress, next)=>{
+router.get("/:_id?", async(req, ress, next)=>{
   try {
-    const books = await getAllBooks({status:"active"});
+    const {_id}= req.params
+    const books =_id ? await getABookById(_id) :await getAllBooks({status:"active"});
 
     res.json({
       status:"success"
