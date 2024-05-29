@@ -17,9 +17,38 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJp
 POST {{userAPI}}
 Content-Type: application/json
 
-
-###Get Book
-GET {{bookAPI}}
-
-###get all public book for users
+{
+    "fName": "prem",
+    "lName": "presfdsm",
+    "phone": 34567,
+    "email": "{asdf@sdfc.com",
+    "password": "sdfdsf"
+  
+}
+  
+# ======== Book
+### Get all books for the admin 
 GET {{bookAPI}}/all
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJpYXQiOjE3MTY4NTE1NjksImV4cCI6MTcxNjg1MTYyOX0.iJPaoDTwqcY7udFwkvLQLlTCqRjve1430CzduQEUqes
+
+
+
+### Get all public books for the user 
+GET {{bookAPI}}/
+
+
+
+### update the book
+PUT {{bookAPI}}
+
+Content-Type: application/json
+
+{
+     "fName": "prem",
+    "lName": "presfdsm",
+    "phone": 34567,
+    "email": "{asdf@sdfc.com",
+    "password": "sdfdsf",
+    "title":"fghj"
+}
+
