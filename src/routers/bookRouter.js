@@ -1,17 +1,12 @@
 import express from "express";
 
 import { auth, isAdmin } from "../middlewares/auth.js";
-import {
-  newBookValidation,
-  updateBookValidation,
-} from "../middlewares/joiValidation.js";
+import { newBookValidation } from "../middlewares/joiValidation.js";
 import {
   getABookById,
   getAllBooks,
   insertBook,
-  updateABookById,
 } from "../models/books/BookModal.js";
-
 const router = express.Router();
 
 //Private controllers create new user
@@ -64,24 +59,6 @@ router.get("/:_id?", async (req, res, next) => {
       status: "success",
       books,
     });
-  } catch (error) {
-    next(error);
-  }
-});
-
-router.put("/", updateBookValidation, isAdmin, auth, async (req, res, next) => {
-  try {
-    const {id, ...rest}= req.body;
-    updatedBooks = await updateABookById(_id, rest);
-    updatedBooks?._id
-      ? res.status(200).json({
-          status: "success",
-          message: "Book has been updated Successfully",
-        })
-      : res.status(403).json({
-          status: "error",
-          message: "Book can't updated try again",
-        });
   } catch (error) {
     next(error);
   }
