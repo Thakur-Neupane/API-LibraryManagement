@@ -41,3 +41,16 @@ export const newBookValidation = (req, res, next) => {
   });
   return joiValidator({ req, res, next, schema });
 };
+
+export const updateBookValidation = (req, res, next) => {
+  const schema = Joi.object({
+    _id: STR_REQUIRED,
+    status: STR_REQUIRED,
+    title: STR_REQUIRED,
+    author: STR_REQUIRED,
+    thumbnail: STR_REQUIRED,
+    publishedYear: Joi.number(),
+    description: STR_REQUIRED,
+  });
+  return joiValidator({ req, res, next, schema });
+};
