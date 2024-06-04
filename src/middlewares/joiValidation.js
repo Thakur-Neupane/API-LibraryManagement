@@ -4,6 +4,7 @@ const STR = Joi.string();
 const STR_REQUIRED = Joi.string().required();
 const PHONE = Joi.string().allow("", null);
 const EMAIL = Joi.string().email({ minDomainSegments: 2 });
+const ISTRUE = Joi.boolean().allow("", null);
 
 const joiValidator = ({ req, res, next, schema }) => {
   try {
@@ -51,6 +52,8 @@ export const updateBookValidation = (req, res, next) => {
     thumbnail: STR_REQUIRED,
     publishedYear: Joi.number(),
     description: STR_REQUIRED,
+    isAvailable: ISTRUE,
+    expectedAvailable: Joi.date().allow("", null),
   });
   return joiValidator({ req, res, next, schema });
 };

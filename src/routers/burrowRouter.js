@@ -12,7 +12,10 @@ import {
   insertBook,
   updateABookById,
 } from "../models/books/BookModal.js";
-import { insertBurrow } from "../models/burrowHistory/BurrowModal.js";
+import {
+  getAllBurrows,
+  insertBurrow,
+} from "../models/burrowHistory/BurrowModal.js";
 const router = express.Router();
 
 const maxBurrowingDays = 15;
@@ -49,6 +52,24 @@ router.post("/", newBurrowValidation, async (req, res, next) => {
     res.json({
       status: "error",
       message: "Unable to burrow the book, try agian later",
+    });
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get(async (req, res, next) => {
+  try {
+    const { _id, role } = req.userInfo;
+    const burrows =
+      (await getAllBurrows({
+        userId: _id,
+      })) || [];
+
+    res.json({
+      status: "error",
+      message: "",
+      burrows,
     });
   } catch (error) {
     next(error);
