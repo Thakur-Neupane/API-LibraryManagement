@@ -22,9 +22,11 @@ import userRouter from "./src/routers/userRouter.js";
 import bookRouter from "./src/routers/bookRouter.js";
 import burroRouter from "./src/routers/burrowRouter.js";
 import { auth } from "./src/middlewares/auth.js";
+import reviewRouter from "./src/routers/reviewRouter.js";
 app.use("/api/v1/users", userRouter);
 app.use("/api/v1/books", bookRouter);
 app.use("/api/v1/burrows", auth, burroRouter);
+app.use("/api/v1/reviews", reviewRouter);
 
 //server status
 app.get("/", (req, res, next) => {

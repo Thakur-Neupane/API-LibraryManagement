@@ -35,20 +35,3 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFAYS5jb20iLCJp
 
 ### Get all public books for the user 
 GET {{bookAPI}}/
-
-
-
-### update the book
-PUT {{bookAPI}}
-
-Content-Type: application/json
-
-{
-     "fName": "prem",
-    "lName": "presfdsm",
-    "phone": 34567,
-    "email": "{asdf@sdfc.com",
-    "password": "sdfdsf",
-    "title":"fghj"
-}
-

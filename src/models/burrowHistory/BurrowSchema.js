@@ -28,6 +28,14 @@ const burrowSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    dueDate: {
+      type: Date,
+      default: "",
+    },
+    returnedDate: {
+      type: Date,
+      default: "",
+    },
   },
   {
     timestamps: true,
